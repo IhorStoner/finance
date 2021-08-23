@@ -7,7 +7,7 @@ import * as path from 'path';
   imports: [
     CalcModule,
     ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, '../', 'static'),
+      rootPath: path.join(__dirname, './', 'static'),
     }),
   ],
 })
