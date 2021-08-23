@@ -3,4 +3,4 @@ import { calcSlice } from "../reducers/calcReducer";
 import { AppThunk } from "../rootReducer";
 import { useDispatch } from "react-redux";
 
-export const calcSave = createAction<boolean>("CALCSAVE")
+export const calcSave = createAction<number>("CALCSAVE")
