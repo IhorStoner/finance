@@ -4,7 +4,7 @@ import Calculator from '../components/Calculator';
 import { calcSave } from '../store/action/calcAction';
 
 const Home: NextPage = (props) => {
-  console.log(props)
+  console.log(props);
   return (
     <div className='homePage'>
       <Calculator />
@@ -12,9 +12,9 @@ const Home: NextPage = (props) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (pathname) => {
+export const getServerSideProps = wrapper.getServerSideProps((store: any) => async (pathname: any) => {
   const allTrack = await store.dispatch(calcSave(5));
-  return {props: {test: allTrack.payload}};
+  return { props: { test: allTrack.payload } };
 });
 
 export default Home;

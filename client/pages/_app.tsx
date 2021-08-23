@@ -1,6 +1,6 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import {wrapper} from '../store/index'
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { wrapper } from '../store/index';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps): any {
@@ -8,4 +8,3 @@ function MyApp({ Component, pageProps }: AppProps): any {
 }
 
 export default wrapper.withRedux(MyApp);
-
