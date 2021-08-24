@@ -8,7 +8,6 @@ import * as path from 'path';
 @Module({
   imports: [
     CalcModule,
-    RenderModule.forRootAsync(Next({ dev: true }), { viewsDir: null }),
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, './', 'static'),
     }),
