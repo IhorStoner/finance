@@ -8,9 +8,9 @@ import * as path from 'path';
 @Module({
   imports: [
     CalcModule,
-    ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, './', 'static'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: path.join(__dirname, './', 'static'),
+    // }),
   ],
 })
 export class AppModule {}
