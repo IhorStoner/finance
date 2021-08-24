@@ -1,8 +1,12 @@
 .calculator {
-
+  max-width: 1200px;
+  margin: 0 auto;
   &__row {
     display: flex;
     justify-content: space-between;
     max-width: 400px;
+  }
+  &__currency{
+    display: flex;
   }
 }

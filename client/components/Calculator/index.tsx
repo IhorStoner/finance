@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../../styles/Calculator.module.scss';
+import Timer from "../Timer";
 import alphavantage from 'alphavantage';
 
 const Calculator: React.FC = () => {
@@ -9,20 +10,14 @@ const Calculator: React.FC = () => {
     setContrubution(e.target.value);
   };
 
-  useEffect(() => {
-    const alpha = alphavantage({ key: 'LWBLO3CDJ3BELOF6' });
-    alpha.crypto.daily('btc', 'usd').then((data) => {
-      const objData = data[`Time Series (Digital Currency Daily)`];
-      const lastItem = Object.keys(objData)[0];
-
-      setVal(objData[lastItem][`1a. open (USD)`]);
-    });
-  }, [contribution]);
+  // const getCurrentCurrency = (currency: number): number => {
+  //   console.log(currency)
+  // }
 
   return (
     <div className={styles.calculator}>
       <h1>Calculator</h1>
-      <div>Курс: ${val}</div>
+      <div className={styles.calculator__currency}>Курс: <Timer callback={():any => {}}/></div>
       <div className={styles.calculator__row}>
         <label htmlFor='contribution'>Вклад:</label>
         <input onChange={onChangeContribution} name={'contribution'} type='text' placeholder={'btc'} />
