@@ -7,7 +7,7 @@ const Calculator: React.FC = () => {
   const [cource, setCource] = useState({val: 0})
   const [profit, setProfit] = useState(0);
   const [data, setData] = useState({
-    balanc: 10,
+    balanc: 20,
     contribution: 0,
     storeVal: 0,
     percentBTC: 0,
@@ -42,7 +42,7 @@ const Calculator: React.FC = () => {
   };
 
   useEffect(() => {
-    setProfit(Number((+data.storeVal / +cource.val).toFixed(2)));
+    setProfit(Number((+data.storeVal / +cource.val).toFixed(8)));
   },[cource])
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const Calculator: React.FC = () => {
         <input disabled={true} onChange={onChangeContribution}  name='marketVal'  type='number' value={data.marketVal} />
       </div>
       <div className={styles.calculator__row}>
-        <label htmlFor='marketVal'>Доход:</label>
+        <label htmlFor='marketVal'>Доход:</label>{console.log(profit)}
         <input disabled={true} name='marketPrice' value={ data.storeVal > 0 ?  (profit >= data.contribution) ? profit : data.contribution : 0 }  type='number'  />
       </div>
     </div>
