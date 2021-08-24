@@ -4,7 +4,7 @@ import Calculator from '../components/Calculator';
 import { calcSave } from '../store/action/calcAction';
 
 const Home: NextPage = (props) => {
-  console.log(props)
+  // console.log(props)
   return (
     <div className='homePage'>
       <Calculator />

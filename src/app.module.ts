@@ -1,14 +1,18 @@
 import { Module } from '@nestjs/common';
 import { CalcModule } from './Cacl/calc.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
-import * as path from 'path';
+import { join } from 'path';
+import { RenderModule } from 'nest-next';
+import Next from 'next';
 
 @Module({
   imports: [
-    CalcModule,
     ServeStaticModule.forRoot({
-      rootPath: path.join(__dirname, '../../', 'static'),
+      rootPath: join(__dirname, '../../src/', 'static'),
     }),
+    RenderModule.forRootAsync(Next({ dev: process.env.NODE_ENV !== 'production' })),
+    CalcModule,
   ],
 })
+
 export class AppModule {}
