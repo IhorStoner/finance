@@ -16,7 +16,7 @@ const Calculator: React.FC = () => {
   const [profit, setProfit] = useState(0);
   const [data, setData] = useState({
     balanc: account.balance,
-    contribution: 0,
+    contribution: '',
     storeVal: 0,
     percentBTC: 0,
     marketVal: 0,
@@ -35,7 +35,7 @@ const Calculator: React.FC = () => {
       const totalPrice =  btcInUSD(cource.val, Number(e.target.value))
       const procent = receiveProcent(cource.val, totalPrice)
       const newVal = Number(data.balanc + data.contribution - Number(e.target.value))
-
+      if(newVal < 0) return
       setData({
         ...data,
         balanc: newVal,
@@ -65,11 +65,11 @@ const Calculator: React.FC = () => {
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='balanc'>Баланс счета:</label>
-        <Input onChange={onChangeContribution} disabled={true} name={'balanc'} type='number' value={data.balanc} />
+        <Input onChange={onChangeContribution}  disabled={true} name={'balanc'} type='number' value={data.balanc} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='contribution'>Сумма вклада:</label>
-        <Input onChange={onChangeContribution} name={'contribution'} type='number' value={data.contribution} />
+        <Input onChange={onChangeContribution} min='0' name={'contribution'} type='number' value={data.contribution} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='storeVal'>Сумма резервации:</label>

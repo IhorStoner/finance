@@ -16,7 +16,7 @@ const ResponsiveDrawer:React.FC  = ({children}) => {
         <Menu.Item
           name='/calculator'
           active={activeItem === '/calculator'}
-          onClick={() => {setActiveItem('calculator');router.push('/calculator')}}
+          onClick={() => {setActiveItem('/calculator');router.push('/calculator')}}
         >
           Калькулятор
         </Menu.Item>
