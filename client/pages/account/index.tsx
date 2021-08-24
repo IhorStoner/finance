@@ -1,11 +1,12 @@
 import type { NextPage } from 'next';
 import MainLayout from '../../components/MainLayout'
+import Calculator from "../../components/Calculator";
 const Account: NextPage = (props) => {
 
   return (
     <div className='account'>
       <MainLayout >
-        <div>Калькулятор</div>
+        <Calculator/>
       </MainLayout>
     </div>
   );
