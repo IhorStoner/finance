@@ -41,13 +41,6 @@ const Calculator: React.FC = () => {
     }
   };
 
-  const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(e.target.name === "balanc") e.target.value = String(data.balanc);
-    if(e.target.name === "contribution") e.target.value = String(data.contribution);
-    if(e.target.name === "storeVal") e.target.value = String(data.storeVal);
-    if(e.target.name === "marketVal") e.target.value = String(data.marketVal);
-  }
-
   useEffect(() => {
     setProfit(Number((+data.storeVal / +cource.val).toFixed(2)));
   },[cource])
@@ -62,23 +55,23 @@ const Calculator: React.FC = () => {
       <div className={styles.calculator__currency}>Курс: {cource.val > 0 && <Timer cource={cource.val} newState={(cource:number):any => setCource({...data, val: cource})} />}</div>
       <div className={styles.calculator__row}>
         <label htmlFor='balanc'>Баланс счета:</label>
-        <input onChange={onChangeContribution} onBlur={onBlurInput} disabled={true} name={'balanc'} type='text' value={data.balanc} />
+        <input onChange={onChangeContribution} disabled={true} name={'balanc'} type='number' value={data.balanc} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='contribution'>Сумма вклада:</label>
-        <input onChange={onChangeContribution} onBlur={onBlurInput} name={'contribution'} type='text' value={data.contribution} />
+        <input onChange={onChangeContribution} name={'contribution'} type='number' value={data.contribution} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='storeVal'>Сумма резервации:</label>
-        <input disabled={true} onChange={onChangeContribution} onBlur={onBlurInput} name="storeVal" type='text' value={data.storeVal} />
+        <input disabled={true} onChange={onChangeContribution}  name="storeVal" type='number' value={data.storeVal} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='marketVal'>Курс хранения:</label>
-        <input disabled={true} onChange={onChangeContribution} onBlur={onBlurInput} name='marketVal'  type='text' value={data.marketVal} />
+        <input disabled={true} onChange={onChangeContribution}  name='marketVal'  type='number' value={data.marketVal} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='marketVal'>Доход:</label>
-        <input disabled={true} name='marketPrice' value={ data.storeVal > 0 ?  (profit >= data.contribution) ? profit : data.contribution : 0 }  type='text'  />
+        <input disabled={true} name='marketPrice' value={ data.storeVal > 0 ?  (profit >= data.contribution) ? profit : data.contribution : 0 }  type='number'  />
       </div>
     </div>
   );
