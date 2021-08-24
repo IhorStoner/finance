@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { CalcService } from './cacl.service';
 
-@Controller()
+@Controller('/api')
 export class CaclController {
   constructor(private readonly calcService: CalcService) {}
 
-  @Get()
+  @Get('/getHello')
   getHello(): string {
     return this.calcService.getHello();
   }
