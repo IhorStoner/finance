@@ -10,7 +10,7 @@ import Next from 'next';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '../../src/', 'static'),
     }),
-    RenderModule.forRootAsync(Next({ dev: process.env.NODE_ENV !== 'production' })),
+    // RenderModule.forRootAsync(Next({ dev: process.env.NODE_ENV !== 'production' })),
     CalcModule,
   ],
 })
