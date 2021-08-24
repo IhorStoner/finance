@@ -5,14 +5,14 @@ import alphavantage from 'alphavantage';
 
 const Calculator: React.FC = () => {
   const [cource, setCource] = useState({val: 0})
+  const [profit, setProfit] = useState(0);
   const [data, setData] = useState({
-    balanc: 1000000,
+    balanc: 10,
     contribution: 0,
     storeVal: 0,
     percentBTC: 0,
     marketVal: 0,
   });
-  const profit = parseInt((+data.storeVal / +cource.val).toFixed(2));
 
   const receiveProcent = (cource: number, contribution: number):number => {
     return (contribution * (100 / cource)) / 100
@@ -27,7 +27,7 @@ const Calculator: React.FC = () => {
 
       const totalPrice =  btcInUSD(cource.val, Number(e.target.value))
       const procent = receiveProcent(cource.val, totalPrice)
-      const newVal = parseInt((data.balanc + data.storeVal - totalPrice).toFixed(0))
+      const newVal = Number(data.balanc + data.contribution - Number(e.target.value))
 
       if(newVal < 0) return null
 
@@ -35,18 +35,22 @@ const Calculator: React.FC = () => {
         balanc: newVal,
         percentBTC: procent ? procent : 0,
         contribution: Number(e.target.value),
-        storeVal: Number(e.target.value) > 0 ? procent * cource.val : 0,
+        storeVal: Number(e.target.value) > 0 ? Number((procent * cource.val).toFixed(2)) : 0,
         marketVal: Number(e.target.value) > 0 ? cource.val : 0,
       })
     }
   };
 
-  const onBlurInput = (e: React.SyntheticEvent<EventTarget>) => {
-    if(e.target.name === "balanc") e.target.value = data.balanc;
-    if(e.target.name === "contribution") e.target.value = data.contribution;
-    if(e.target.name === "storeVal") e.target.value = data.storeVal;
-    if(e.target.name === "marketVal") e.target.value = data.marketVal;
+  const onBlurInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.name === "balanc") e.target.value = String(data.balanc);
+    if(e.target.name === "contribution") e.target.value = String(data.contribution);
+    if(e.target.name === "storeVal") e.target.value = String(data.storeVal);
+    if(e.target.name === "marketVal") e.target.value = String(data.marketVal);
   }
+
+  useEffect(() => {
+    setProfit(Number((+data.storeVal / +cource.val).toFixed(2)));
+  },[cource])
 
   useEffect(() => {
     fetch("https://bitpay.com/api/rates").then(cur => cur.json()).then(cource => setCource({...cource, val: cource[2].rate}))
