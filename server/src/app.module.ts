@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { CalcModule } from './Cacl/calc.module';
-import {ServeStaticModule} from "@nestjs/serve-static";
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
-
+import { RegistrationModule } from './Registration/registration.module';
 
 @Module({
   imports: [
+    MongooseModule.forRoot('mongodb+srv://IhorSakhno:123456789q@finance.duj2r.mongodb.net/Finance'),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../src/', 'static'),
+      rootPath: join(__dirname, '../src/', 'static'),
     }),
-    CalcModule,
+    RegistrationModule,
   ],
 })
-
 export class AppModule {}

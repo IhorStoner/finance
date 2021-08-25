@@ -23,7 +23,7 @@ const InputComponent: React.FC = () => {
       <div className={styles.inputOutput__container}>
         <div style={{ width: '50%' }}>
           <Header as='h3' block>
-            Отрыть счет
+            Открыть счет
           </Header>
           <div style={{ marginBottom: '15px' }}>Номер счёта: 7754</div>
           <Form>
