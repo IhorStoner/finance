@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CalcModule } from './Cacl/calc.module';
-import {ServeStaticModule} from "@nestjs/serve-static";
+import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
 
