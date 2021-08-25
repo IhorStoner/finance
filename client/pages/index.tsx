@@ -19,7 +19,7 @@ const Login: NextPage = (props) => {
               <Button variant='outlined' primary style={{ marginRight: '5px' }}>
                 Открыть Счет
               </Button>
-              <Button variant='outlined' primary onClick={() => router.push('/account')}>
+              <Button variant='outlined' primary onClick={() => router.push('/calculator')}>
                 Вход
               </Button>
             </div>

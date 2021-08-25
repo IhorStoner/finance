@@ -1,58 +1,59 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import { Menu } from 'semantic-ui-react'
+import {selectAccount} from "../../store/selector/accountSelector";
+import {useSelector} from "react-redux";
 
-
-const ResponsiveDrawer:React.FC  = (props) => {
-  const {children} = props
+const ResponsiveDrawer:React.FC  = ({children}) => {
   const router = useRouter()
 
-  const [activeItem,setActiveItem] = useState('editorials')
+  const [activeItem,setActiveItem] = useState(router.pathname)
+  const account = useSelector(selectAccount)
 
   return (
     <div className='wrapper'>
       <Menu style={{display: 'flex', width: '100%'}}>
         <Menu.Item
-          name='calculator'
-          active={activeItem === 'calculator'}
-          onClick={() => {setActiveItem('calculator');router.push('/account')}}
+          name='/calculator'
+          active={activeItem === '/calculator'}
+          onClick={() => {setActiveItem('calculator');router.push('/calculator')}}
         >
           Калькулятор
         </Menu.Item>
 
         <Menu.Item
-          name='balans'
-          active={activeItem === 'balans'}
-          onClick={() => setActiveItem('balans')}
+          name='/balance'
+          active={activeItem === '/balance'}
+          onClick={() => setActiveItem('/balance')}
         >
-          Общий баланс: 0.5 BTC
+          Общий баланс: {account.balance} BTC
         </Menu.Item>
 
         <Menu.Item
-          name='activeCheck'
-          active={activeItem === 'activeCheck'}
-          onClick={() => setActiveItem('activeCheck')}
+          name='/activeCheck'
+          active={activeItem === '/activeCheck'}
+          onClick={() => setActiveItem('/activeCheck')}
         >
           Активных счетов: 1
         </Menu.Item>
         <Menu.Item
-          name='closeCheck'
-          active={activeItem === 'closeCheck'}
-          onClick={() => setActiveItem('closeCheck')}
+          name='/closeCheck'
+          active={activeItem === '/closeCheck'}
+          onClick={() => setActiveItem('/closeCheck')}
         >
           Закрытые счета: 0
         </Menu.Item>
         <Menu.Item
-          name='input'
-          active={activeItem === 'input'}
-          onClick={() => {setActiveItem('input'); router.push('/input')}}
+          name='/input'
+          active={activeItem === '/input'}
+          onClick={() => {setActiveItem('/input'); router.push('/input')}}
         >
           Ввод
         </Menu.Item>
         <Menu.Item
-          name='output'
-          active={activeItem === 'output'}
-          onClick={() => {setActiveItem('output'); router.push('/output')}}
+          name='/output'
+          active={activeItem === '/output'}
+          onClick={() => {setActiveItem('/output'); router.push('/output')}}
         >
           Вывод
         </Menu.Item>

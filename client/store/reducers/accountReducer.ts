@@ -1,13 +1,13 @@
 import { AnyAction, createReducer, createSlice } from '@reduxjs/toolkit';
 import { HYDRATE } from 'next-redux-wrapper';
-import { CalcState } from '../../types/calctypes';
-import { calcSave } from '../action/calcAction';
+import { AccountState } from '../../types/calctypes';
+import { setBalance } from '../action/accountAction';
 
-export const calcSlice = createSlice({
-  name: 'calc',
+export const accountSlice = createSlice({
+  name: 'account',
   initialState: {
-    calc: 0,
-  } as CalcState,
+    balance: 0.5,
+  } as AccountState,
   reducers: {},
   extraReducers: {
     [HYDRATE]: (state, action: AnyAction) => {
@@ -16,8 +16,8 @@ export const calcSlice = createSlice({
         ...action.payload.player,
       };
     },
-    [calcSave.type]: (state, action) => {
-      state.calc = action.payload;
+    [setBalance.type]: (state, action) => {
+      state.balance = state.balance + action.payload;
     },
   },
 });

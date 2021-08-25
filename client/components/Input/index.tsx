@@ -1,10 +1,23 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button, Header, Icon, Image, Input, Message, Segment} from 'semantic-ui-react';
 import styles from '../../styles/InputOutputComponent.module.scss';
 import { Divider, Form, Label } from 'semantic-ui-react';
 import code from '../../assets/img/code.jpg'
+import {useAccountAction} from "../../store/action";
 
 const InputComponent: React.FC = () => {
+  const [val, setVal] = useState('')
+  const { setBalance } = useAccountAction()
+
+  const onChangeValue = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value
+    setVal(value)
+  };
+
+  const handleInputMoney = () => {
+    setBalance(+val)
+  }
+
   return (
     <div className={styles.inputOutput}>
       <div className={styles.inputOutput__container}>
@@ -23,12 +36,12 @@ const InputComponent: React.FC = () => {
             <Divider />
             <Form.Field>
               <Label pointing='below'>Сумма вклада</Label>
-              <Input type='text' placeholder='Сумма' labelPosition='right' label='BTC' style={{ width: '300px', display: 'block' }} />
+              <Input type='number' value={val} onChange={onChangeValue} placeholder='Сумма' labelPosition='right' label='BTC' style={{ width: '300px', display: 'block' }} />
             </Form.Field>
             <Divider />
           </Form>
           <h1>Переведите средства и нажмите готово</h1>
-          <Button color='green' style={{ marginBottom: '10px' }}>
+          <Button color='green' style={{ marginBottom: '10px' }} onClick={handleInputMoney}>
             Готово
           </Button>
           <Message warning attached='bottom'>

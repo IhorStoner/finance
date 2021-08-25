@@ -4,7 +4,9 @@
   &__row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     max-width: 400px;
+    margin-top: 10px;
   }
   &__currency{
     display: flex;
