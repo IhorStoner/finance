@@ -1,14 +1,18 @@
 import React from 'react';
 import { Button, Header, Icon, Input, Message, Segment } from 'semantic-ui-react';
 import { Divider, Form, Label } from 'semantic-ui-react';
+import {useSelector} from "react-redux";
+import {selectAccount} from "../../store/selector/accountSelector";
 
 const Output: React.FC = () => {
+  const account = useSelector(selectAccount)
+
   return (
     <div style={{ width: '50%' }}>
       <Header as='h3' block>
         Вывод Средств
       </Header>
-      <div>Средства на счету: 0.5 BTC</div>
+      <div>Средства на счету: {account.balance} BTC</div>
       <Form>
         <Header as='h3'>Адресс:</Header>
         <Form.Field>
@@ -17,7 +21,7 @@ const Output: React.FC = () => {
         </Form.Field>
         <Divider />
       </Form>
-      <Segment raised>Вы получите: 0,4875 BTC (0.5 BTC - 2.5% коммисия)</Segment>
+      <Segment raised>Вы получите: {account.balance - account.balance * 0.025} BTC ({account.balance} BTC - 2.5% коммисия)</Segment>
       <Button color='red' style={{ marginTop: '10px', marginBottom: '10px' }}>
         Вывод
       </Button>

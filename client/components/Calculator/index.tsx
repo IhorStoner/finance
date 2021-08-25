@@ -17,7 +17,7 @@ const Calculator: React.FC = () => {
   const [profit, setProfit] = useState(0);
   const [data, setData] = useState({
     balanc: account.balance,
-    contribution: 0,
+    contribution: '',
     storeVal: 0,
     percentBTC: 0,
     marketVal: 0,
@@ -35,15 +35,16 @@ const Calculator: React.FC = () => {
     if (e.target.name === 'contribution') {
       const totalPrice =  btcInUSD(cource.val, Number(e.target.value))
       const procent = receiveProcent(cource.val, totalPrice)
+      // @ts-ignore
       const newVal = Number(data.balanc + data.contribution - Number(e.target.value))
 
-      console
-      if(newVal < 0) return 0
+      if(newVal < 0) return
 
       setData({
         ...data,
         balanc: newVal,
         percentBTC: procent ? procent : 0,
+        // @ts-ignore
         contribution: Number(e.target.value),
         storeVal: Number(e.target.value) > 0 ? Number((procent * cource.val).toFixed(2)) : 0,
         marketVal: Number(e.target.value) > 0 ? cource.val : 0,
@@ -61,6 +62,8 @@ const Calculator: React.FC = () => {
       .then((cource) => setCource({ ...cource, val: cource[2].rate }));
   }, []);
 
+  // @ts-ignore
+  //
   return (
     <div className={styles.calculator}>
       <div className={styles.calculator__currency}>
@@ -73,7 +76,7 @@ const Calculator: React.FC = () => {
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='contribution'>Сумма вклада:</label>
-        <Input onChange={onChangeContribution} name={'contribution'} type='number' value={data.contribution} />
+        <Input onChange={onChangeContribution} min='0' name={'contribution'} type='number' value={data.contribution} />
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='storeVal'>Сумма резервации:</label>
@@ -85,6 +88,7 @@ const Calculator: React.FC = () => {
       </div>
       <div className={styles.calculator__row}>
         <label htmlFor='marketVal'>Доход:</label>
+        {/*@ts-ignore*/}
         <Input disabled={true} name='marketPrice' value={ data.storeVal > 0 ?  (profit >= data.contribution) ? profit : data.contribution : 0 }  type='number'  />
       </div>
   <div className={styles.calculator__row}>
